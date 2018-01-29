@@ -13,7 +13,21 @@
       hostname: centos6
       folder: servers
     register: addhost
-    ignore_errors: yes
+
+  - name: debug
+    debug:
+      var: addhost
+
+  - name: check mk
+    check_mk:
+      server: 192.168.56.60
+      omdsite: ndevel
+      action: discover_services
+      username: ansible
+      password: ATTEBFHVDKLYALQUGVCV
+      hostname: centos6
+      discover_services_mode: refresh
+    register: addhost
 
   - name: debug
     debug:
@@ -27,7 +41,6 @@
       username: ansible
       password: ATTEBFHVDKLYALQUGVCV
     register: addhost
-    ignore_errors: yes
 
   - name: debug
     debug:
