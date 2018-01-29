@@ -1,0 +1,11 @@
+{
+    "ANSIBLE_MODULE_ARGS": {
+	"server": "bbtmonmadl01-srv.bitban.int",
+        "omdsite": "irmad",
+        "action": "add_host",
+        "username": "ansible",
+        "password": "NNIPEKHTQIAVONQNINRN",
+	"hostname": "aramidl10",
+	"folder": "servers"
+    }
+}

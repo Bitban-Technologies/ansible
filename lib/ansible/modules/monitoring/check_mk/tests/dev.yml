@@ -1,0 +1,14 @@
+- name: test my new module
+  connection: local
+  hosts: localhost
+  tasks:
+  - name: check mk
+    check_mk:
+      server: 192.168.56.60
+      omdsite: ndevel
+      action: add_host
+      username: ansible
+      password: ATTEBFHVDKLYALQUGVCV
+      hostname: centos6
+      folder: servers
+
