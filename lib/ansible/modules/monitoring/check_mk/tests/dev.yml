@@ -2,6 +2,7 @@
   connection: local
   hosts: localhost
   tasks:
+
   - name: check mk
     check_mk:
       server: 192.168.56.60
@@ -11,4 +12,8 @@
       password: ATTEBFHVDKLYALQUGVCV
       hostname: centos6
       folder: servers
+    register: addhost
 
+  - name: debug
+    debug:
+      var: addhost

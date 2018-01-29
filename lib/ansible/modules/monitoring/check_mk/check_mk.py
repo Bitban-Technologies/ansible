@@ -80,9 +80,13 @@ def main():
     result["info"] = info
 
     try:
-        result["response"] = response.read()
+        result["response"] = json.loads(response.read())
     except Exception:
         result["response"] = {}
+        module.fail_json(msg='Response can\'t read', **result)
+    else:
+        if result["response"]["result_code"] != 0:
+            module.fail_json(msg=result["response"]["result"], **result)
 
     module.exit_json(**result)
 
