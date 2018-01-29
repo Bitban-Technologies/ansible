@@ -22,6 +22,7 @@ import json
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.urls import fetch_url
 from ansible.modules.monitoring.check_mk.check_mk_add_host import AddHost
+from ansible.modules.monitoring.check_mk.check_mk_activate_changes import ActivateChanges
 
 def getArgumentSpec():
     return {
@@ -30,7 +31,7 @@ def getArgumentSpec():
         "action": {
             "required": True,
             #"choices": ["add_host", "edit_host", "delete_host", "get_host", "get_all_hosts", "discover_services", "activate_change"],
-            "choices": ["add_host"],
+            "choices": ["add_host", "activate_changes"],
             "type": "str"
         },
         "username": {"required": True, "type": "str"},
@@ -41,7 +42,8 @@ def getArgumentSpec():
         "unset_attributes": {"type": "list"},
         "folder": {"type": "str"},
         "sites": {"type": "list"},
-        "autoActivateChange": {"default": False, "type": "bool"},
+        "autoActivateChanges": {"default": False, "type": "bool"},
+        "allow_foreign_changes": {"type": "int"},
         "autoDiscoverServices": {"default": False, "type": "bool"},
     }
 
@@ -53,7 +55,7 @@ def actionsMapper(params):
         #"get_host": "GetHost",
         #"get_all_hosts": "GetAllHosts",
         #"discover_services": "DiscoverServices",
-        #"activate_change": "ActivateChange",
+        "activate_changes": ActivateChanges(params),
     }
 
 
