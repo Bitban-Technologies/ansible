@@ -67,20 +67,21 @@ def main():
         argument_spec=getArgumentSpec()
     )
 
-    actionClass = actionsMapper(module.params).get(module.params["action"])
+    actionObj = actionsMapper(module.params).get(module.params["action"])
 
     result = {}
-    result["request"] = actionClass.getRequest()
-    result["url"] = actionClass.getAdditionalURLParams()
+    result["request"] = actionObj.getRequest()
+    result["url"] = actionObj.getAdditionalURLParams()
 
-    response, info = FetchUrl(module.params["server"],
-                              module.params["omdsite"],
-                              module.params["action"],
-                              module.params["username"],
-                              module.params["password"],
-                              module,
-                              actionClass.getRequest(),
-    ).do()
+    fetchUrlObj = FetchUrl(module.params["server"],
+                           module.params["omdsite"],
+                           module.params["action"],
+                           module.params["username"],
+                           module.params["password"],
+                           module,
+                           actionObj.getRequest())
+
+    response, info = fetchUrlObj.do()
 
     result["info"] = info
 
