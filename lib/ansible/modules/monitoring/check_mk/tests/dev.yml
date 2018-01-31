@@ -1,3 +1,4 @@
+---
 - name: test my new module
   connection: local
   hosts: localhost

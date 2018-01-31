@@ -20,7 +20,7 @@ author:
 
 import json
 from ansible.module_utils.basic import AnsibleModule
-from ansible.module_utils.urls import fetch_url
+from ansible.modules.monitoring.check_mk.check_mk_fetch_url import FetchUrl
 from ansible.modules.monitoring.check_mk.check_mk_add_host import AddHost
 from ansible.modules.monitoring.check_mk.check_mk_activate_changes import ActivateChanges
 from ansible.modules.monitoring.check_mk.check_mk_discover_services import DiscoverServices
@@ -73,13 +73,14 @@ def main():
     result["request"] = actionClass.getRequest()
     result["url"] = actionClass.getAdditionalURLParams()
 
-    URL = "http://" + module.params["server"] + "/" + module.params["omdsite"] + "/check_mk/webapi.py"
-    URL = URL + "?action=" + module.params["action"] + "&_username=" + module.params["username"] + "&_secret=" + module.params["password"]
-
-    response, info = fetch_url(module,
-                               URL,
-                               data=actionClass.getRequest(),
-                               method="POST")
+    response, info = FetchUrl(module.params["server"],
+                              module.params["omdsite"],
+                              module.params["action"],
+                              module.params["username"],
+                              module.params["password"],
+                              module,
+                              actionClass.getRequest(),
+    ).do()
 
     result["info"] = info
 
