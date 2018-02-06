@@ -1,0 +1,6 @@
+{'hostname': 'myserver123',
+ 'folder': 'munich/network',
+ 'attributes': {'ipaddress': '192.168.0.42',
+                'site': 'prod',
+                'tag_agent': 'cmk-agent'},
+ 'create_folders': '0'}

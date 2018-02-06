@@ -1,29 +1,22 @@
-#!/usr/bin/python
 
 import json
+import re
+from ansible.modules.monitoring.check_mk.check_mk_web_api import CheckMKWebApi
 
 class AddHost:
 
-    def __init__(self, params):
-        # TODO mejorar esto
-        if type(params["attributes"]) is dict:
-            self.attributes = params["attributes"]
-        if type(params["folder"]) is str:
-            self.folder = params["folder"]
-        if type(params["hostname"]) is str:
-            self.hostname = params["hostname"]
+    def __init__(self, module):
+        self.api = CheckMKWebApi(module.params["check_mk_url"],
+                                 module.params["username"],
+                                 module.params["password"],
+                                 module)
 
 
-    def getRequest(self):
-        ret = {}
-        if hasattr(self, "attributes"):
-            ret["attributes"] = self.attributes
-        if hasattr(self, "folder"):
-            ret["folder"] = self.folder
-        if hasattr(self, "hostname"):
-            ret["hostname"] = self.hostname
+    def get_result(self):
 
-        return "request=" + json.dumps(ret)
+        try:
+            response = self.api.make_request("add_host")
+        except Exception, message:
+            return {"fail": True, "msg": message.message}
 
-    def getAdditionalURLParams(self):
-        return ""
+        print(response)

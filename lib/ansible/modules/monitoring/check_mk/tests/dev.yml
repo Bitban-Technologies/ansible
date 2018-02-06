@@ -6,8 +6,7 @@
 
   - name: check mk
     check_mk:
-      server: 192.168.56.60
-      omdsite: ndevel
+      check_mk_url: http://192.168.56.60/ndevel
       action: add_host
       username: ansible
       password: ATTEBFHVDKLYALQUGVCV
@@ -21,8 +20,7 @@
 
   - name: check mk
     check_mk:
-      server: 192.168.56.60
-      omdsite: ndevel
+      check_mk_url: http://192.168.56.60/ndevel
       action: discover_services
       username: ansible
       password: ATTEBFHVDKLYALQUGVCV
@@ -36,8 +34,7 @@
 
   - name: check mk
     check_mk:
-      server: 192.168.56.60
-      omdsite: ndevel
+      check_mk_url: http://192.168.56.60/ndevel
       action: activate_changes
       username: ansible
       password: ATTEBFHVDKLYALQUGVCV
