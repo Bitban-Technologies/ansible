@@ -20,18 +20,18 @@ class ActivateChanges:
         if response["result_code"] == 1:
             response.update({"failed": True, "msg": response["result"]})
 
+        response.update({"changed": True})
+
         return response
 
 
     def get_data(self, params):
 
-        ret = {}
+        try:
+            ret = CheckMKParamsHelper(params).get_mandatory_params(["sites"])
+        except Exception, message:
+            raise Exception(message.message)
 
-        sites = params.get("sites")
-        if sites == None:
-            raise Exception("sites is a mandatory field")
-
-        ret.update({"sites": sites})
         ret.update(CheckMKParamsHelper(params).get_optional_params(["allow_foreign_changes"]))
 
         return ret

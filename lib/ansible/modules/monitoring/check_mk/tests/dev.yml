@@ -27,7 +27,6 @@
       hostname: centos6
       discover_services_mode: refresh
     register: addhost
-    when: false
 
   - name: debug
     debug:

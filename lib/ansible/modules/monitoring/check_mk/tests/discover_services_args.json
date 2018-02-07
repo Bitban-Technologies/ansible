@@ -1,0 +1,10 @@
+{
+    "ANSIBLE_MODULE_ARGS": {
+		"check_mk_url": "http://192.168.56.60/ndevel",
+		"action": "discover_services",
+		"username": "ansible",
+		"password": "ATTEBFHVDKLYALQUGVCV",
+		"hostname": "centos6",
+		"discover_services_mode": "refresh"
+	}
+}
