@@ -27,6 +27,7 @@
       hostname: centos6
       discover_services_mode: refresh
     register: addhost
+    when: false
 
   - name: debug
     debug:
@@ -37,6 +38,9 @@
       check_mk_url: http://192.168.56.60/ndevel
       action: activate_changes
       username: ansible
+      sites: [ndevel]
+      hostname: centos6
+      allow_foreign_changes: true
       password: ATTEBFHVDKLYALQUGVCV
     register: addhost
 

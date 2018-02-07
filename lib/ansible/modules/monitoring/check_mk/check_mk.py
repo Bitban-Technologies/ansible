@@ -56,7 +56,7 @@ def actionsMapper(module):
         #"get_host": "GetHost",
         #"get_all_hosts": "GetAllHosts",
         #"discover_services": DiscoverServices(module),
-        #"activate_changes": ActivateChanges(module),
+        "activate_changes": ActivateChanges(module),
     }
 
 
