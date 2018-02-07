@@ -37,10 +37,11 @@ def getArgumentSpec():
         # no_log is required to avoid the warning "warnings": ["Module did not set no_log for password"]
         "password": {"required": True, "type": "str", "no_log": True},
         "hostname": {"type": "str", "default": None},
-        "attributes": {"type": "dict", "default": None},
+        "attributes": {"type": "dict", "default": {}},
         "unset_attributes": {"type": "list", "default": None},
-        "folder": {"type": "str", "default": None},
-        "sites": {"type": "list", "default": None},
+        "folder": {"type": "str", "default": "/"},
+        "create_folders": {"type": "int", "default": 0},
+        "sites": {"type": "list", "default": None}, # default is none because it will be set with hostname value
         "auto_activate_changes": {"type": "bool", "default": False},
         "allow_foreign_changes": {"type": "int", "default": 0},
         "auto_discover_services": {"type": "bool", "default": False},
@@ -67,9 +68,9 @@ def main():
 
     action = actionsMapper(module).get(module.params["action"])
 
-    result = action.get_result()
+    result = action.get_result(module.params)
 
-    if result["fail"]:
+    if result.has_key("failed"):
         module.fail_json(**result)
 
     module.exit_json(**result)
