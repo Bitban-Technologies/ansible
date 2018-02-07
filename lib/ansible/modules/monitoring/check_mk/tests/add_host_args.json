@@ -5,6 +5,10 @@
 		"username": "ansible",
 		"password": "ATTEBFHVDKLYALQUGVCV",
 		"hostname": "centos6",
-		"folder": "servers"
-	}
+		"folder": "servers",
+		"auto_activate_changes": "true",
+		"sites": ["ndevel"],
+		"auto_discover_services": "true",
+		"discover_services_mode": "refresh"
+    }
 }

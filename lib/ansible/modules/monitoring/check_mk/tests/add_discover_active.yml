@@ -1,0 +1,23 @@
+---
+- name: test my new module
+  connection: local
+  hosts: localhost
+  tasks:
+
+  - name: check mk
+    check_mk:
+      check_mk_url: http://192.168.56.60/ndevel
+      action: add_host
+      username: ansible
+      password: ATTEBFHVDKLYALQUGVCV
+      hostname: centos6
+      folder: servers
+      auto_activate_changes: true
+      sites: [ndevel]
+      auto_discover_services: true
+      discover_services_mode: refresh
+    register: addhost
+
+  - name: debug
+    debug:
+      var: addhost
